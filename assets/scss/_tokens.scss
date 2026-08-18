@@ -1,0 +1,51 @@
+// Edit these two maps to tailor the site's colour schemes. The neutral pearl
+// and dark-grey palette keeps reading comfortable; teal is reserved for links
+// and other small interactive cues.
+
+$light-colors: (
+  paper: lightgray,
+  paper-raised: white,
+  ink: grayscale(90%),
+  muted: grayscale(70%),
+  line: lightgray,
+  accent: teal,
+  accent-hover: color-mix(in srgb, teal 60%, black),
+  focus: color-mix(in srgb, teal 60%, black)
+);
+
+$dark-colors: (
+  paper: color-mix(in srgb, black 82%, darkslategray),
+  paper-raised: color-mix(in srgb, black 72%, darkslategray),
+  ink: gainsboro,
+  muted: silver,
+  line: slategray,
+  accent: mediumturquoise,
+  accent-hover: paleturquoise,
+  focus: paleturquoise
+);
+
+@mixin color-scheme($mode, $colors) {
+  color-scheme: $mode;
+
+  @each $name, $value in $colors {
+    --#{$name}: #{$value};
+  }
+}
+
+:root {
+  @include color-scheme(light, $light-colors);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include color-scheme(dark, $dark-colors);
+  }
+}
+
+:root[data-theme="light"] {
+  @include color-scheme(light, $light-colors);
+}
+
+:root[data-theme="dark"] {
+  @include color-scheme(dark, $dark-colors);
+}

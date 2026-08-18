@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.theme = savedTheme;
+      } catch (_) {}
+    </script>
+    {{ $styles := resources.Get "scss/site.scss" | toCSS (dict "targetPath" "css/site.css" "outputStyle" "compressed") | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+    <script src="{{ "js/theme.js" | relURL }}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+      <nav aria-label="Main navigation">
+        {{ range site.Menus.main }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle colour scheme">
+          <span aria-hidden="true" data-theme-icon>◐</span>
+        </button>
+      </nav>
+    </header>
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer>
+      <span>© {{ now.Year }} {{ site.Title }}</span>
+      <span><a href="mailto:{{ site.Params.email_uni }}">Email</a> · <a href="{{ site.Params.github }}">GitHub</a></span>
+    </footer>
+  </body>
+</html>

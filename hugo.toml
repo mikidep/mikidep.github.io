@@ -1,0 +1,29 @@
+baseURL = "/"
+locale = "en"
+title = "Michele De Pascalis"
+enableRobotsTXT = true
+relativeURLs = true
+
+[params]
+  description = "Michele De Pascalis' persona website."
+  email = "michele.de.pascalis.1024@gmail.com"
+  email_uni = "michde@taltech.ee"
+  github = "https://github.com/mikidep"
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+  # [[menus.main]]
+  #   name = "Writing"
+  #   pageRef = "/posts"
+  #   weight = 30
+  [[menus.main]]
+    name = "Teaching"
+    pageRef = "/teaching"
+    weight = 20
+  [[menus.main]]
+    name = "Publications"
+    pageRef = "/publications"
+    weight = 40

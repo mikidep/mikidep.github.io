@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <article>
+    <header class="page-header">
+      <h1>{{ .Title }}</h1>
+    </header>
+    <div class="content">{{ .Content }}</div>
+    <ol class="publications">
+      {{ $publicationsJSON := os.Getenv "HUGO_PUBLICATIONS_JSON" | default "[]" }}
+      {{ $publications := transform.Unmarshal $publicationsJSON }}
+      {{ range sort $publications "date" "desc" }}
+        <li>
+          {{ range .author }} {{ .given }} {{ .family }}, {{ end }}
+          <h2>{{ .title }}</h2>
+          <p class="publication-venue">
+            {{ with .venue }}<em>{{ . }}</em>{{ end }}
+          </p>
+          <p class="publication-links">
+            {{ with .DOI }}<a href="https://doi.org/{{ . }}">DOI</a>{{ end }}
+            {{ with .URL }}<a href="{{ . }}">Link</a>{{ end }}
+          </p>
+        </li>
+      {{ else }}
+        <li>No publication to display.</li>
+      {{ end }}
+    </ol>
+  </article>
+{{ end }}

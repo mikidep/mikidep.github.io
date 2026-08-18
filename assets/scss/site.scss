@@ -1,0 +1,129 @@
+// Hugo's embedded Sass compiler resolves this partial at build time.
+@import "tokens";
+
+* { box-sizing: border-box; }
+
+html { background: var(--paper); }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .16em;
+
+  &:hover { color: var(--accent-hover); }
+  &:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+}
+
+.site-header, main, footer { width: unquote("min(calc(100% - 2.5rem), 700px)"); margin-inline: auto; }
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { color: var(--ink); font-size: 1.1rem; font-weight: 700; text-decoration: none; }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem 1rem;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .78rem;
+
+  a { color: var(--muted); text-decoration: none; }
+  a:hover { color: var(--accent); text-decoration: underline; }
+}
+
+.theme-toggle {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+
+  &:hover { border-color: var(--accent); color: var(--accent); }
+  &:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+}
+
+main { min-height: calc(100vh - 180px); padding: 4rem 0; }
+h1, h2 { font-weight: 600; line-height: 1.2; }
+h1 { margin: 0 0 1.6rem; font-size: clamp(2.25rem, 6vw, 3.35rem); }
+h2 { margin: 2rem 0 .65rem; font-size: 1.45rem; }
+
+.eyebrow {
+  margin: 0 0 .65rem;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lead { max-width: 38rem; font-size: 1.08rem; }
+.lead h2 { margin-top: 2.5rem; font-size: 1.25rem; }
+.home-links { margin-top: 2rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: .9rem; }
+.home-links span { color: var(--muted); padding: 0 .35rem; }
+.home-intro { display: grid; grid-template-columns: minmax(0, 1fr) 152px; align-items: start; gap: 2.5rem; }
+.profile-image { width: 152px; height: 152px; border: 1px solid var(--line); border-radius: 50%; object-fit: cover; object-position: center; }
+
+.page-header { margin-bottom: 2.5rem; }
+.page-header h1 { margin-bottom: .35rem; }
+.page-header time { color: var(--muted); font-family: ui-sans-serif, system-ui, sans-serif; font-size: .8rem; }
+.content { max-width: 40rem; }
+.content p + p { margin-top: 1.2rem; }
+
+.post-list { margin-top: 3rem; border-top: 1px solid var(--line); }
+.post-card { padding: 1.4rem 0; border-bottom: 1px solid var(--line); }
+.post-card .eyebrow { margin: 0; }
+.post-card h2 { margin: .25rem 0; font-size: 1.35rem; }
+.post-card h2 a { color: var(--ink); }
+.post-card p:last-child { color: var(--muted); margin-bottom: 0; }
+
+.publications { margin: 2.75rem 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.publications li { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.publications p { margin: 0; }
+.publication-authors, .publication-venue { color: var(--muted); font-size: .95rem; }
+.publications h2 { margin: .2rem 0; font-size: 1.28rem; }
+.publication-links { display: flex; gap: 1rem; margin-top: .35rem !important; font-family: ui-sans-serif, system-ui, sans-serif; font-size: .78rem; }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+
+@media (max-width: 560px) {
+  main { padding: 3rem 0; }
+  .site-header, footer { align-items: flex-start; flex-direction: column; gap: .75rem; }
+  .home-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+  .profile-image { order: -1; width: 112px; height: 112px; }
+}
